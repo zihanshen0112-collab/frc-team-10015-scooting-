@@ -29,7 +29,7 @@ var TEAM_HINTS_URL_GOOGLE =
 var TEAM_HINTS_URL_LOCAL = "team_hints.json";  // Local backup JSON file
 
 // Data source selection: 'google' or 'local'. If Google cannot access the site, you can manually change it to 'local'.
-var TEAM_HINTS_SOURCE = 'google';  // Google Sheets is used by default
+var TEAM_HINTS_SOURCE = 'local';  // local is used by default
 
 // The team prompts for data storage
 var teamHints = {};
