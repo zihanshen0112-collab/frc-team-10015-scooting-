@@ -24,7 +24,8 @@ var options = {
 
 // The team prompts the data source configuration
 // Replace the GOOGLE_SHEETS_CSV_URL below with the CSV link you actually published
-var TEAM_HINTS_URL_GOOGLE = "https://docs.google.com/spreadsheets/d/1fusNT2Bx3krLfqGlbzY6-Nwzw02tNh1o6fbRNlTCGkM/edit?gid=0#gid=0";
+var TEAM_HINTS_URL_GOOGLE = 
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5XR3XlWu4oScOnxO7h8dx_0vcVw4Q7mBNHfYspO5eeOkEL1sExhcN11vi1J5nRJnzX20iC2XeixOL/pub?output=csv";
 var TEAM_HINTS_URL_LOCAL = "team_hints.json";  // Local backup JSON file
 
 // Data source selection: 'google' or 'local'. If Google cannot access the site, you can manually change it to 'local'.
