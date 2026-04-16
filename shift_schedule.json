@@ -1,9 +1,9 @@
 {
-  "period": 6,
-  "states": [
-    "Group 1 for Blue\nGroup 2 for Red\nGroup 3 to Strategy\nGroup 4 on break",
-    "Group 1 to Strategy\nGroup 2 for Red\nGroup 3 on Break\nGroup 4 for Blue",
-    "Group 1 on Break\nGroup 2 to Strategy\nGroup 3 for Red\nGroup 4 for Blue",
-    "Group 1 for Blue\nGroup 2 on Break\nGroup 3 for Red\nGroup 4 to Strategy"
-  ]
+    "period": 6,
+    "states": [
+        "Group 1 for Blue\nGroup 2 for Red\nGroup 3 to Strategy\nGroup 4 on break",
+        "Group 1 to Strategy\nGroup 2 for Red\nGroup 3 on Break\nGroup 4 for Blue",
+        "Group 1 on Break\nGroup 2 to Strategy\nGroup 3 for Red\nGroup 4 for Blue",
+        "Group 1 for Blue\nGroup 2 on Break\nGroup 3 for Red\nGroup 4 to Strategy"
+    ]
 }

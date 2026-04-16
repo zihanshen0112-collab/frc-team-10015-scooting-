@@ -73,6 +73,9 @@ function updateShiftHint() {
     }
     var hintCell = document.getElementById("shift-hint");
     if (hintCell) {
+        hintCell.style.backgroundColor = "black";
+        hintCell.style.color = "white";
+        hintCell.style.fontWeight = "normal";
         hintCell.innerHTML = "Shift scheduling:" + hintText.replace(/\n/g, "<br>");
     }
 }
