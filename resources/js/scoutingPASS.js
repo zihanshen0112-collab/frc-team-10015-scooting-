@@ -24,6 +24,58 @@ var options = {
 
 // Built from the JSON
 var requiredFields = []; //["e", "m", "l", "r", "s", "as"];
+// 排班轮换配置
+var shiftConfig = { period: null, states: [] };
+var shiftLoaded = false;
+
+function loadShiftSchedule() {
+    fetch("shift_schedule.json")
+        .then(response => {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            return response.json();
+        })
+        .then(data => {
+            shiftConfig = { period: data.period || 6, states: data.states || [] };
+            shiftLoaded = true;
+            updateShiftHint();
+            console.log("The shift scheduling configuration has been loaded successfully", shiftConfig);
+        })
+        .catch(err => {
+            console.error("Failed to load the shift scheduling configuration", err);
+            shiftConfig = { period: 6, states: ["The shift schedule failed to load. Please ask the Stand Manager"] };
+            shiftLoaded = true;
+            updateShiftHint();
+        });
+}
+
+function getShiftIndex(matchNum) {
+    if (!shiftConfig.period || shiftConfig.states.length === 0) return -1;
+    var cycleIndex = Math.floor((matchNum - 1) / shiftConfig.period);
+    return cycleIndex % shiftConfig.states.length;
+}
+
+function updateShiftHint() {
+    var matchInput = document.getElementById("input_m");
+    if (!matchInput) return;
+    var matchNum = parseInt(matchInput.value.trim());
+    var hintText = "";
+    if (isNaN(matchNum) || matchNum < 1) {
+        hintText = "Please enter a valid session number";
+    } else if (!shiftLoaded) {
+        hintText = "The shift schedule is loading...";
+    } else {
+        var idx = getShiftIndex(matchNum);
+        if (idx >= 0 && idx < shiftConfig.states.length) {
+            hintText = shiftConfig.states[idx];
+        } else {
+            hintText = "The shift scheduling configuration is incorrect.";
+        }
+    }
+    var hintCell = document.getElementById("shift-hint");
+    if (hintCell) {
+        hintCell.innerHTML = "Shift scheduling:" + hintText.replace(/\n/g, "<br>");
+    }
+}
 
 function addTimer(table, idx, name, data) {
   var row = table.insertRow(idx);
@@ -792,6 +844,18 @@ if (mydata.endgame && document.getElementById("endgame_table")) {
     idx = addElement(pmt, idx, element);
   });
 
+  // prematch_table bottom prompt
+  var pmtPre = document.getElementById("prematch_table");
+  var shiftRow = pmtPre.insertRow(pmtPre.rows.length);
+  var shiftCell = shiftRow.insertCell(0);
+  shiftCell.setAttribute("colspan", 2);
+  shiftCell.id = "shift-hint";
+  shiftCell.style.textAlign = "center";
+  shiftCell.style.backgroundColor = "#ffffcc";
+  shiftCell.style.fontWeight = "bold";
+  shiftCell.style.padding = "8px";
+  updateShiftHint();
+
   if (!enableGoogleSheets) {
     document.getElementById("submit").style.display = "none";
   }
@@ -1203,6 +1267,7 @@ function clearForm() {
     } else {
       document.getElementById("input_m").value = match + 1;
     }
+    updateShiftHint();   // 新增
 
     // Robot
     resetRobot();
@@ -1699,6 +1764,14 @@ window.onload = function () {
       getSchedule(ec);
     }
     this.drawFields();
+
+    // Bind the Match # input event and load the schedule
+    var matchInputElem = document.getElementById("input_m");
+    if (matchInputElem) {
+        matchInputElem.addEventListener("input", updateShiftHint);
+        matchInputElem.addEventListener("change", updateShiftHint);
+    }
+    loadShiftSchedule();
     if (enableGoogleSheets) {
       console.log("Enabling Google Sheets.");
       setUpGoogleSheets();
