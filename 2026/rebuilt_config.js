@@ -58,34 +58,6 @@ var config_data = `
     }
   ],
   "auton": [
-    { "name": "Have Working Auto?",
-      "code": "auto_working",
-      "type": "radio",
-      "choices": {
-        "yes": "Yes",
-        "no": "No"
-      },
-      "required": "true"
-    },
-    { "name": "Pickup from Depot",
-      "code": "auto_depot",
-      "type": "checkbox"
-    },
-    { "name": "Pickup from Outpost",
-      "code": "auto_outpost",
-      "type": "checkbox"
-    },
-    { "name": "Pickup from Neutral Zone",
-      "code": "auto_neutral",
-      "type": "checkbox"
-    },
-    { "name": "Shooting Cycle Number",
-      "code": "auto_cycle_num",
-      "type": "number",
-      "min": 0,
-      "max": 99,
-      "defaultValue": 0
-    },
     { "name": "Any comments",
       "code": "auto_comments",
       "type": "text",
@@ -126,22 +98,6 @@ var config_data = `
       "code": "tc8",
       "type": "counter"
     },
-    { "name": "INACTIVE trench crosses",
-      "code": "tc9",
-      "type": "counter"
-    },
-    { "name": "Number of cycles for Shift 1",
-      "code": "cycles_shift1",
-      "type": "counter"
-    },
-    { "name": "Number of cycles for Shift 2",
-      "code": "cycles_shift2",
-      "type": "counter"
-    },
-    { "name": "Number of cycles for Endgame",
-      "code": "cycles_endgame",
-      "type": "counter"
-    }
   ],
   "postmatch": [
     { "name": "Vibes Power Index",
