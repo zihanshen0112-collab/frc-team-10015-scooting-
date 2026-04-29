@@ -97,7 +97,7 @@ var config_data = `
     { "name": "INACTIVE bump crosses",
       "code": "tc8",
       "type": "counter"
-    },
+    }
   ],
   "postmatch": [
     { "name": "Vibes Power Index",
